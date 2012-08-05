@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(:version => 20120805043822) do
   create_table "permissions", :force => true do |t|
     t.integer  "user_account_id"
     t.string   "restricted_area"
+    t.string   "grants"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end

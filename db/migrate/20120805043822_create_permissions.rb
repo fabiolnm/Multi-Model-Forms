@@ -3,8 +3,10 @@ class CreatePermissions < ActiveRecord::Migration
     create_table :permissions do |t|
       t.integer :user_account_id
       t.string :restricted_area
+      t.string :grants
 
       t.timestamps
     end
   end
 end
+
