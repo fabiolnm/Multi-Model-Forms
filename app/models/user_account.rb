@@ -3,5 +3,6 @@ class UserAccount < ActiveRecord::Base
 
   validates_presence_of :username, :password, :person
   belongs_to :person
+  has_many :permissions
 end
 
