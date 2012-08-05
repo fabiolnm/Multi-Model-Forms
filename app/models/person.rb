@@ -3,7 +3,7 @@ class Person < ActiveRecord::Base
 
   validates_presence_of :name
 
-  has_one :user_account, inverse_of: :person
+  has_one :user_account, dependent: :destroy, inverse_of: :person
   accepts_nested_attributes_for :user_account, allow_destroy: true
 end
 

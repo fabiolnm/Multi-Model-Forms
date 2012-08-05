@@ -3,7 +3,7 @@ class UserAccount < ActiveRecord::Base
 
   validates_presence_of :username, :password, :person
   belongs_to :person
-  has_many :permissions, inverse_of: :user_account
+  has_many :permissions, dependent: :destroy, inverse_of: :user_account
 
   accepts_nested_attributes_for :permissions, allow_destroy: true
 end
