@@ -15,7 +15,32 @@
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
+
+  <%= f.fields_for :user_account do |acc| %>
+    <div class="field">
+      <%= acc.label :username %><br />
+      <%= acc.text_field :username %>
+    </div>
+    <div class="field">
+      <%= acc.label :password %><br />
+      <%= acc.password_field :password %>
+    </div>
+
+    <%= acc.fields_for :permissions, acc.object.permissions_types do |p| %>
+      <div class="field">
+        <%= p.label p.object.restricted_area %>
+        <%= p.hidden_field :restricted_area %>
+        <%= p.select :grants, [ "Read-Only", "Read-Write", "Read-Write-Delete" ], include_blank: true %>
+        <% unless p.object.new_record? %>
+          <%= p.check_box :_destroy %>
+          <%= p.label :_destroy, 'Remove' %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+
