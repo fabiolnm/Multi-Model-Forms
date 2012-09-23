@@ -2,10 +2,16 @@ function PermissionListViewModel() {
   this.permissions = ko.observableArray();
 
   this.add = function() {
-    this.permissions.push({});
+    this.permissions.push({
+      _destroy: ko.observable()
+    });
   }
 
   this.empty = function() {
-    return this.permissions().length == 0;
+    var permissions = this.permissions();
+    for (i = 0; i < permissions.length; i++)
+      if (!permissions[i]._destroy())
+          return false;
+    return true;
   }
 }

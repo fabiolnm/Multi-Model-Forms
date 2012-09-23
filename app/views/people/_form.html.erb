@@ -28,7 +28,7 @@
 
     <table id="permissions_table">
       <caption>Permissões</caption>
-      <thead data-bind="ifnot: permissions().length == 0">
+      <thead data-bind="ifnot: empty()">
         <tr><th>Nível</th><th>Liberações</th><th>Remover</th></tr>
       </thead>
       <tbody data-bind="foreach: permissions">
@@ -45,7 +45,7 @@
             <option>Read-Write</option>
             <option>Read-Write-Delete</option>
           </select></td>
-          <td><input type="checkbox" /></td>
+          <td><input type="checkbox" data-bind="checked: _destroy" /></td>
         </tr>
       </tbody>
       <tfoot>
