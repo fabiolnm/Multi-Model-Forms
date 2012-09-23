@@ -6,10 +6,14 @@ caption {
   font-size: larger;
 }
 form table {
+  border-collapse: collapse;
   td {
     text-align: center
   }
   button {
     float: right;
+  }
+  .removed_row {
+    background-color: salmon
   }
 }

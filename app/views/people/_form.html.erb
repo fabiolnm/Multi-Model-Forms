@@ -31,8 +31,8 @@
       <thead data-bind="ifnot: empty()">
         <tr><th>Nível</th><th>Liberações</th><th>Remover</th></tr>
       </thead>
-      <tbody data-bind="foreach: permissions">
-        <tr>
+      <tbody data-bind="foreach: { data: permissions, includeDestroyed: true }">
+        <tr data-bind="css: { removed_row: _destroy() }">
           <td><select>
             <option></option>
             <option>Admin</option>

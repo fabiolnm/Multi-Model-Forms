@@ -8,10 +8,6 @@ function PermissionListViewModel() {
   }
 
   this.empty = function() {
-    var permissions = this.permissions();
-    for (i = 0; i < permissions.length; i++)
-      if (!permissions[i]._destroy())
-          return false;
-    return true;
+    return this.permissions().length == 0;
   }
 }
