@@ -26,17 +26,28 @@
       <%= acc.password_field :password %>
     </div>
 
-    <%= acc.fields_for :permissions, acc.object.permissions_types do |p| %>
-      <div class="field">
-        <%= p.label p.object.restricted_area %>
-        <%= p.hidden_field :restricted_area %>
-        <%= p.select :grants, [ "Read-Only", "Read-Write", "Read-Write-Delete" ], include_blank: true %>
-        <% unless p.object.new_record? %>
-          <%= p.check_box :_destroy %>
-          <%= p.label :_destroy, 'Remove' %>
-        <% end %>
-      </div>
-    <% end %>
+    <table id="permissions_table">
+      <caption>Permissões</caption>
+      <thead><tr><th>Nível</th><th>Liberações</th><th>Remover</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><select>
+            <option></option>
+            <option>Admin</option>
+            <option>Logs</option>
+            <option>Backup</option>
+          </select></td>
+          <td><select>
+            <option></option>
+            <option>Read-Only</option>
+            <option>Read-Write</option>
+            <option>Read-Write-Delete</option>
+          </select></td>
+          <td><input type="checkbox" /></td>
+        </tr>
+      </tbody>
+      <tfoot><tr><th colspan="3"><button>Adicionar</button></th></tr></tfoot>
+    </table>
   <% end %>
 
   <div class="actions">
