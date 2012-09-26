@@ -21,7 +21,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
-gem 'knockoutjs-rails'
+gem 'knockoutjs-rails', git: "git://github.com/fabiolnm/knockoutjs-rails.git"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
