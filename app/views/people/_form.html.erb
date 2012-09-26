@@ -32,20 +32,21 @@
         <tr><th>Nível</th><th>Liberações</th><th>Remover</th></tr>
       </thead>
       <tbody data-bind="foreach: { data: permissions, includeDestroyed: true }">
-        <tr data-bind="css: { removed_row: _destroy() }">
-          <td><select>
-            <option></option>
-            <option>Admin</option>
-            <option>Logs</option>
-            <option>Backup</option>
-          </select></td>
-          <td><select>
-            <option></option>
-            <option>Read-Only</option>
-            <option>Read-Write</option>
-            <option>Read-Write-Delete</option>
-          </select></td>
-          <td><input type="checkbox" data-bind="checked: _destroy" /></td>
+        <tr data-bind="css: { removed_row: _destroy }">
+          <%= acc.fields_for :permissions, [Permission.new] do |p| %>
+            <% base = p.object_name[0..-4] %>
+            <input type="hidden" data-bind="value: id,
+                attr: { name: '<%= base %>[' + index + '][id]' }" />
+            <td><select data-bind="value: restricted_area,
+                attr: { name: '<%= base %>[' + index + '][restricted_area]' },
+                options: $root.areas, optionsCaption: 'Choose...'"></select></td>
+            <td><select data-bind="value: grants,
+                attr: { name: '<%= base %>[' + index + '][grants]' },
+                options: $root.grants, optionsCaption: 'Choose...',
+                optionsText: 'grant', optionsValue: 'value'"></select></td>
+            <td><input type="checkbox" data-bind="checked: _destroy,
+                attr: { name: '<%= base %>[' + index + '][_destroy]' }" /></td>
+          <% end %>
         </tr>
       </tbody>
       <tfoot>
@@ -66,7 +67,8 @@
   </div>
 <% end %>
 <script>
-  var view_model = new PermissionListViewModel();
+  var current_permissions = <%= @person.user_account.permissions.to_json.html_safe %>;
+  var view_model = new PermissionListViewModel(current_permissions);
   var permissions_table = document.getElementById("#permissions_table");
   ko.applyBindings(view_model, permissions_table);
 </script>
